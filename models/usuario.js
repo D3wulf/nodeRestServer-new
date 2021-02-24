@@ -24,6 +24,7 @@ const usuarioSchema = new Schema({
     role: {
         type: String,
         required: false,
+        //default: 'USER_ROLE',
         emun: ['ADMIN_ROLE', 'USER_ROLE']
 
     },
@@ -45,7 +46,8 @@ usuarioSchema.methods.toJSON = function() {
     //SE CREA UNA CONSTANTE QUE DEJA FUERA LA VERSION __V, EL PASSWORD Y
     // ...USUARIO SERA EL RESTO DE PARAMETROS REUNIDOS EN UNO QUE LLAMA usuario
     // es para que no salgan esos datos
-    const { __v, password, ...usuario } = this.toObject();
+    const { __v, password, _id, ...usuario } = this.toObject();
+    usuario.uid = _id;
     return usuario;
 }
 
